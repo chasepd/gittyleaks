@@ -36,6 +36,7 @@ class GittyLeak():
         self.find_anything = None
         self.case_sensitive = False
         self.show_revision_names = False
+        self.show_any_revision_name = False
         self.no_banner = False
         self.delete = None
         self.matched_items = []
@@ -179,6 +180,9 @@ class GittyLeak():
                 print('-----Revisions--------------------------')
                 for x in v:
                     print(x[1])
+            elif self.show_any_revision_name:
+                print('-----Selected Revision------------------')
+                print(v[0][1])
             else:
                 print('num_of_revisions: {}'.format(len(set([x[1] for x in v]))))
             print('----------------------------------------')
@@ -228,6 +232,10 @@ def get_args_parser():
                    help='Omit the banner at the start of a print statement')
     p.add_argument('--no-fancy-color', '-f', action='store_true',
                    help='Do not colorize output')
+    p.add_argument('--show-revision-names', '-s', action='store_true',
+                   help='Show names of revisions in verbose mode')
+    p.add_argument('--show-any-revision-name', '-z', action='store_true',
+                   help='Show a single revision name in verbose mode')
     return p
 
 
